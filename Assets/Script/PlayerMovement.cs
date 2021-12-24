@@ -4,18 +4,43 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    public float speed;
+    public float jump;
+    public GameObject rayOrigin;
+    public float rayCheckDistance;
+    public float gravityScale = 1.5f;
+    [SerializeField] private LayerMask groundLayer;
+    Rigidbody2D rb;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = gravityScale;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float dirX = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(dirX * 7f, rb.velocity.y);
+        Debug.DrawRay(rayOrigin.transform.position, Vector2.down, Color.red);
+        if (Input.GetAxis("Jump") > 0)
+        {
+            if (isGrounded())
+            {
+                //rb.AddForce(Vector2.up * jump, ForceMode2D.Force);
+                rb.velocity = new Vector2(rb.velocity.x, jump);
+            }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        float x = Input.GetAxis("Horizontal");
+        // Debug.DrawRay(rayOrigin.transform.position, Vector2.down * 5, Color.red);
+        rb.velocity = new Vector3(x * speed, rb.velocity.y, 0);
+    }
+
+    private bool isGrounded()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin.transform.position, Vector2.down, rayCheckDistance, groundLayer);
+        return hit.collider != null;
     }
 }

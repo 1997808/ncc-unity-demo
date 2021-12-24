@@ -200,11 +200,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.63, y: 0.26, z: -10}
+  m_LocalPosition: {x: 0.16000009, y: 0.65, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1446074842}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &623238257
 GameObject:
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 623238263}
   - component: {fileID: 623238262}
   - component: {fileID: 623238261}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1447,6 +1447,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1208977045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1208977046}
+  m_Layer: 0
+  m_Name: groundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1208977046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208977045}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.4, y: -1.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1446074842}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1446074838
 GameObject:
   m_ObjectHideFlags: 0
@@ -1577,7 +1607,7 @@ Transform:
   m_LocalPosition: {x: -2.47, y: 0.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 519420032}
+  - {fileID: 1208977046}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1612,6 +1642,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dcaa3cc06693c043adbc4c734bc2d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
+  jump: 13
+  rayOrigin: {fileID: 1208977045}
+  rayCheckDistance: 0.2
+  gravityScale: 3
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1618703753
 GameObject:
   m_ObjectHideFlags: 0
