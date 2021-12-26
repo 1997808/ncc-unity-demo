@@ -36,12 +36,24 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jump);
             }
         }
-        
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("attack");
+        }
+
         UpdateAnimation();
     }
 
     void FixedUpdate()
     {
+        if (isGrounded())
+        {
+            animator.SetBool("grounded", true);
+        } else
+        {
+            animator.SetBool("grounded", false);
+        }
         //Debug.Log(x);
         //float x = Input.GetAxis("Horizontal");
         //flip();
