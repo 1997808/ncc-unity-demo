@@ -9,7 +9,10 @@ public class PlayerMovement : MonoBehaviour
     public GameObject rayOrigin;
     public float rayCheckDistance;
     public float gravityScale = 1.5f;
+    private bool facingRight = true;
+    private float x = 0f;
     [SerializeField] private LayerMask groundLayer;
+    public Animator animator;
     Rigidbody2D rb;
 
     void Start()
@@ -20,7 +23,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Debug.DrawRay(rayOrigin.transform.position, Vector2.down, Color.red);
+        //Debug.DrawRay(rayOrigin.transform.position, Vector2.down * rayCheckDistance, Color.red);
+        x = Input.GetAxis("Horizontal");
+        flip();
+        rb.velocity = new Vector3(x * speed, rb.velocity.y, 0);
+
         if (Input.GetAxis("Jump") > 0)
         {
             if (isGrounded())
@@ -29,18 +36,46 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jump);
             }
         }
+        
+        UpdateAnimation();
     }
 
     void FixedUpdate()
     {
-        float x = Input.GetAxis("Horizontal");
-        // Debug.DrawRay(rayOrigin.transform.position, Vector2.down * 5, Color.red);
-        rb.velocity = new Vector3(x * speed, rb.velocity.y, 0);
+        //Debug.Log(x);
+        //float x = Input.GetAxis("Horizontal");
+        //flip();
+        //rb.velocity = new Vector3(x * speed, rb.velocity.y, 0);
+    }
+
+    void flip()
+    {
+        if ((Input.GetAxis("Horizontal") < 0 && facingRight) || (Input.GetAxis("Horizontal") > 0 && !facingRight))
+        {
+            facingRight = !facingRight;
+            transform.Rotate(new Vector3(0, 180, 0));
+        }
     }
 
     private bool isGrounded()
     {
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin.transform.position, Vector2.down, rayCheckDistance, groundLayer);
         return hit.collider != null;
+    }
+
+    private void UpdateAnimation()
+    {
+        if (x > 0f)
+        {
+            animator.SetBool("running", true);
+        }
+        else if (x < 0f)
+        {
+            animator.SetBool("running", true);
+        }
+        else
+        {
+            animator.SetBool("running", false);
+        }
     }
 }
