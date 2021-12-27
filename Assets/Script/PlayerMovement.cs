@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
         flip();
         rb.velocity = new Vector3(x * speed, rb.velocity.y, 0);
 
-        if (Input.GetAxis("Jump") > 0)
+        if (Input.GetKeyDown(KeyCode.K))
         {
             if (isGrounded())
             {
@@ -37,9 +37,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.J))
         {
-            animator.SetTrigger("attack");
+            if (isGrounded())
+            {
+                animator.SetTrigger("attack");
+            }
         }
 
         UpdateAnimation();
