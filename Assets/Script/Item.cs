@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class Item : MonoBehaviour
 {
     public enum InteractionType { NONE, PickUp, Examine};
     public InteractionType type;
+    public string description;
+    public UnityEvent customEvent;
 
     private void Reset()
     {
@@ -20,7 +23,7 @@ public class Item : MonoBehaviour
         {
             case InteractionType.PickUp:
                 Debug.Log("Pick");
-                FindObjectOfType<Interactable>().PickUpItem(gameObject);
+                FindObjectOfType<InventorySystem>().PickUpItem(gameObject);
                 gameObject.SetActive(false);
                 break;
             case InteractionType.Examine:

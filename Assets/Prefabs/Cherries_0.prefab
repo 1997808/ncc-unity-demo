@@ -123,3 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  description: cherry
+  customEvent:
+    m_PersistentCalls:
+      m_Calls: []

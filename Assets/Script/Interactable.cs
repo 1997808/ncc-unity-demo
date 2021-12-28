@@ -10,8 +10,8 @@ public class Interactable : MonoBehaviour
     public LayerMask detectionLayer;
     private GameObject detectedObject;
 
-    [Header("List")]
-    public List<GameObject> pickedItems = new List<GameObject>();
+    //[Header("List")]
+    //public List<GameObject> pickedItems = new List<GameObject>();
 
     // Update is called once per frame
     void Update()
@@ -44,10 +44,10 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    public void PickUpItem(GameObject item)
-    {
-        pickedItems.Add(item);
-    }
+    //public void PickUpItem(GameObject item)
+    //{
+    //    pickedItems.Add(item);
+    //}
 
     //private void OnDrawGizmos()
     //{
