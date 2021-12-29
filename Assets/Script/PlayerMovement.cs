@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     public Animator animator;
     Rigidbody2D rb;
+    private bool isDead = false;
 
     void Start()
     {
@@ -23,6 +24,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (isDead)
+        {
+            return;
+        }
         //Debug.DrawRay(rayOrigin.transform.position, Vector2.down * rayCheckDistance, Color.red);
         x = Input.GetAxis("Horizontal");
         flip();
@@ -76,6 +81,13 @@ public class PlayerMovement : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin.transform.position, Vector2.down, rayCheckDistance, groundLayer);
         return hit.collider != null;
+    }
+
+    public void Die()
+    {
+        isDead = true;
+        animator.SetBool("die", true);
+        animator.SetTrigger("hurt");
     }
 
     private void UpdateAnimation()
